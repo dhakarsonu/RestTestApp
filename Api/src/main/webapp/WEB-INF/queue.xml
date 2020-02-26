@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queue-entries>
+
+    <!--Default Module Queues start-->
+    <!--<queue>-->
+        <!--<name>contact-sync</name>-->
+        <!--<rate>10/s</rate>-->
+        <!--<bucket-size>100</bucket-size>-->
+        <!--<retry-parameters>-->
+            <!--<task-retry-limit>3</task-retry-limit>-->
+        <!--</retry-parameters>-->
+    <!--</queue>-->
+    <!--&lt;!&ndash;Default Module Queues end&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash; Api Module Queues start&ndash;&gt;-->
+    <!--<queue>-->
+        <!--<name>chatServerQueue</name>-->
+        <!--<rate>20/s</rate>-->
+        <!--<bucket-size>40</bucket-size>-->
+        <!--<max-concurrent-requests>10</max-concurrent-requests>-->
+        <!--<retry-parameters>-->
+            <!--<task-retry-limit>2</task-retry-limit>-->
+        <!--</retry-parameters>-->
+    <!--</queue>-->
+
+    <!--<queue>-->
+        <!--<name>notificationQueue</name>-->
+        <!--<rate>20/s</rate>-->
+        <!--<bucket-size>100</bucket-size>-->
+        <!--<max-concurrent-requests>10</max-concurrent-requests>-->
+        <!--<retry-parameters>-->
+            <!--<task-retry-limit>1</task-retry-limit>-->
+        <!--</retry-parameters>-->
+    <!--</queue>-->
+
+    <!--&lt;!&ndash; Api Module Queues start&ndash;&gt;-->
+    <!--<queue>-->
+        <!--<name>leadARQueue</name>-->
+        <!--<rate>20/s</rate>-->
+        <!--<bucket-size>100</bucket-size>-->
+        <!--<max-concurrent-requests>20</max-concurrent-requests>-->
+        <!--<retry-parameters>-->
+            <!--<task-retry-limit>3</task-retry-limit>-->
+        <!--</retry-parameters>-->
+    <!--</queue>-->
+
+    <!--&lt;!&ndash; Api Module Queues end&ndash;&gt;-->
+
+    <!--&lt;!&ndash; Developer Module Queues start&ndash;&gt;-->
+    <!--<queue>-->
+        <!--<name>versionProcessQueue</name>-->
+        <!--<rate>5/s</rate>-->
+        <!--<bucket-size>10</bucket-size>-->
+        <!--<retry-parameters>-->
+            <!--<task-retry-limit>2</task-retry-limit>-->
+            <!--<min-backoff-seconds>5</min-backoff-seconds>-->
+        <!--</retry-parameters>-->
+        <!--<target>developer</target>-->
+    <!--</queue>-->
+    <!-- Developer Module Queues end-->
+
+</queue-entries>

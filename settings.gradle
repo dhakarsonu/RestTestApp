@@ -1,0 +1,4 @@
+rootProject.name = 'mncm'
+include 'Api'
+include 'Common'
+

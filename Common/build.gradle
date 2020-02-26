@@ -1,0 +1,52 @@
+group 'com.mncm'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'com.google.cloud.tools.appengine'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        //classpath libs.gcloudGradle
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:1.3.1'
+    }
+}
+
+dependencies {
+
+    //compile libraries.servletApi
+
+    // appengine
+    compile libraries.gaeApiSdk
+    compile libraries.gaeJdo
+
+    compile libraries.gaeLabs
+    testCompile libraries.gaeTest
+
+    compile libraries.GaeCloudStorage
+
+    compile libraries.CommonsFileUpload
+
+    compile files("$projectDir/../SharedLibs/JdoUtil-0.0.2.jar")
+
+    compile 'com.theupswell.appengine.counter:appengine-counter:2.0.1'
+    compile 'org.bitbucket.b_c:jose4j:0.6.0'
+    compile group: 'com.drewnoakes', name: 'metadata-extractor', version: '2.10.1'
+
+    compile libraries.Jsoup
+    compile libraries.Velocity
+}

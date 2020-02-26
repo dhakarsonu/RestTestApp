@@ -1,0 +1,129 @@
+group 'com.mncm'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.google.cloud.tools.appengine'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+def gaeLiveVersion = 1
+def gaeStagVersion = 1
+
+def makeDefault = false
+
+version = '1';
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        //classpath libs.gcloudGradle
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:1.3.1'
+    }
+}
+
+dependencies {
+
+    compileOnly libraries.servletApi
+
+    // appengine
+    //appengineSdk libraries.gaeJavaSdk
+    compile libraries.gaeJdo
+
+    testCompile libraries.gaeTest
+    compile libraries.gaeLabs
+    compile libraries.CommonsFileUpload
+    compile libraries.GaeCloudStorage
+    //resteasy
+    compile libraries.resteasy
+
+    compile project(":Common")
+
+    compile files("$projectDir/../SharedLibs/JdoUtil-0.0.2.jar")
+
+    compile 'com.google.gcm:gcm-server:1.0.0'
+    compile 'org.bitbucket.b_c:jose4j:0.5.2'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile group: 'org.jboss.resteasy', name: 'resteasy-multipart-provider', version: '3.0.19.Final'
+
+    compile libraries.Jsoup
+
+}
+
+appengine.run.port = 8889
+
+task getEnvironment {
+    def env = project.hasProperty("env") ? project.property("env") : "dev"
+}
+
+appengineDeploy.dependsOn(build , getEnvironment)
+
+appengine {
+    deploy {
+        stopPreviousVersion = false  // - stop the current version (if it's true)
+        promote = false // - and make this as the current version (if it's true)
+        version = '1'
+        project = 'mncm-196208'
+    }
+}
+
+//appengine {
+//    run {
+//        serverVersion = config.gae.serverVersion
+//        port = config.gae.port.api
+//
+//        jvmFlags = config.gae.newDefaultJvmFlags
+//
+//        storagePath = file(config.gae.storagePath)
+//        datastorePath = file(config.gae.storagePath)
+//    }
+//
+//    deploy {
+//
+//        def config = getDeployConfig()
+//
+//
+//
+//        if (!config || !config.project) {
+//            throw new GradleException("invalid deployment config, check getDeployConfig() function")
+//        }
+//
+//        project =  config.project
+//        version = config.live ? gaeLiveVersion : gaeStagVersion
+//        stopPreviousVersion = makeDefault  // for stoping / not stoping current version
+//        promote = makeDefault         // for promote / not promote to new version
+//    }
+//
+//}
+//
+//
+//task copyGaeConfigFiles(type : Copy) {
+//
+//    from "${projectDir}/../gaeConfigFiles"
+//    include '*.xml'
+//    into file("${buildDir}/exploded-${project.name}/WEB-INF")
+//
+//    from "${projectDir}/../gaeConfigFiles"
+//    include '*.xml'
+//    into file("${buildDir}/staged-app/WEB-INF")
+//
+//    doLast {
+//        println 'copying appengine configuration *.xml files to WEB-INF'
+//    }
+//}
+//
+//appengineStage.dependsOn copyGaeConfigFiles
+//appengineRun.dependsOn copyGaeConfigFiles
+//appengineDeploy.dependsOn copyGaeConfigFiles
