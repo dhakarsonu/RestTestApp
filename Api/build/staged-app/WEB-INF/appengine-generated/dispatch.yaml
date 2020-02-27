@@ -1,3 +1,0 @@
-dispatch:
-- url: '*/favicon.ico'
-  module: default
